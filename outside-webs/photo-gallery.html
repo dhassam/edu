@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DH Photo Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #e74c3c;
+            --secondary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-dark: #333;
+            --text-light: #fff;
+            --card-bg: #ffffff;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            text-align: center;
+            padding: 100px 20px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            overflow: hidden;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -2;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9) 0%, rgba(231, 76, 60, 0.8) 100%);
+            z-index: -1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            color: white;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            line-height: 1.8;
+        }
+
+        .header-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            top: 0;
+            z-index: 10;
+        }
+
+        .filter-btn {
+            padding: 12px 25px;
+            border: none;
+            background-color: var(--light-color);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark-color);
+            border: 2px solid transparent;
+        }
+
+        .filter-btn:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), #c0392b);
+            color: white;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+            max-width: 500px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+            color: var(--dark-color);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .photo-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            z-index: 1;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .photo-img-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .photo-card:hover .photo-img {
+            transform: scale(1.1);
+        }
+
+        .photo-info {
+            padding: 25px;
+        }
+
+        .photo-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .photo-category {
+            display: inline-block;
+            padding: 6px 15px;
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--primary-color);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+        }
+
+        .photo-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .photo-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+        }
+
+        .photo-date {
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Simplified Modal - Fixed for Mobile */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        /* Image Container - Takes most space */
+        .modal-img-container {
+            flex: 1;
+            min-height: 0; /* Important for flexbox */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #000;
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Info Container - Compact on mobile */
+        .modal-info {
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            max-height: 40vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+            line-height: 1.3;
+        }
+
+        .modal-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .modal-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-category {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            z-index: 1001;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: rotate(90deg);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--dark-color);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .photo-count {
+            display: flex;
+            gap: 30px;
+        }
+
+        .count-item {
+            text-align: center;
+        }
+
+        .count-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .count-label {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design - Fixed Modal for Mobile */
+        @media (min-width: 768px) {
+            /* Desktop Modal Layout */
+            .modal-content {
+                flex-direction: row;
+                height: 80vh;
+                max-height: 80vh;
+            }
+
+            .modal-img-container {
+                flex: 2;
+                padding: 40px;
+            }
+
+            .modal-info {
+                flex: 1;
+                max-width: 400px;
+                border-top: none;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+                max-height: none;
+                overflow-y: visible;
+                padding: 40px 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .modal-title {
+                font-size: 2rem;
+            }
+
+            .modal-description {
+                font-size: 1.1rem;
+            }
+
+            .modal-date {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 25px;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .header-stats {
+                gap: 15px;
+            }
+
+            .stat-item {
+                padding: 15px 20px;
+                min-width: 120px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            /* Mobile Modal Optimizations */
+            .modal-content {
+                max-height: 95vh;
+                border-radius: 0;
+            }
+
+            .modal-img-container {
+                padding: 10px;
+                min-height: 50vh;
+            }
+
+            .modal-info {
+                max-height: 45vh;
+                padding: 15px;
+            }
+
+            .modal-title {
+                font-size: 1.3rem;
+                margin-bottom: 8px;
+            }
+
+            .modal-description {
+                font-size: 0.95rem;
+                margin-bottom: 12px;
+                line-height: 1.4;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .close-btn {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            header {
+                padding: 80px 20px;
+                min-height: 400px;
+            }
+
+            .filter-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .modal-img-container {
+                min-height: 40vh;
+                padding: 5px;
+            }
+
+            .modal-info {
+                max-height: 50vh;
+                padding: 12px;
+            }
+
+            .modal-title {
+                font-size: 1.2rem;
+            }
+
+            .modal-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        .modal-info {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Prevent text selection on modal */
+        .modal-content {
+            user-select: none;
+        }
+
+        /* Better image scaling on mobile */
+        @media (orientation: landscape) and (max-height: 600px) {
+            .modal-content {
+                flex-direction: row;
+            }
+
+            .modal-img-container {
+                min-height: 80vh;
+            }
+
+            .modal-info {
+                max-height: 80vh;
+                max-width: 300px;
+            }
+        }
+
+/* Back to Top Button Styles - Aesthetic & Smaller */
+.back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #8A2BE2 0%, #9370DB 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(138, 43, 226, 0.3);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    border: none;
+    outline: none;
+    backdrop-filter: blur(5px);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+    background: linear-gradient(135deg, #9370DB 0%, #8A2BE2 100%);
+}
+
+.back-to-top:active {
+    transform: translateY(-1px);
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+    .back-to-top {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Header with Background Image -->
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-overlay"></div>
+        <div class="container header-content">
+            <h1><i class="fas fa-camera-retro"></i> DH Photo Gallery</h1>
+            <p class="subtitle">A visual journey through Darul Huda Assam Centre - Capturing moments, creating memories</p>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-count-header">0</span>
+                    <span class="stat-label">Total Photos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="category-count">4</span>
+                    <span class="stat-label">Categories</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="featured-count">3</span>
+                    <span class="stat-label">Featured</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Controls -->
+        <div class="controls">
+            <button class="filter-btn active" data-filter="all">
+                <i class="fas fa-layer-group"></i> All Photos
+            </button>
+            <button class="filter-btn" data-filter="festival">
+                <i class="fas fa-calendar-alt"></i> Festivals
+            </button>
+            <button class="filter-btn" data-filter="occasion">
+                <i class="fas fa-gift"></i> Occasions
+            </button>
+            <button class="filter-btn" data-filter="event">
+                <i class="fas fa-calendar-check"></i> Events
+            </button>
+            <button class="filter-btn" data-filter="campus">
+                <i class="fas fa-university"></i> Campus
+            </button>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-box" placeholder="Search photos by title or description...">
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div class="loading" id="loading">
+            <div class="loader"></div>
+            <p>Loading photos...</p>
+        </div>
+
+        <!-- Gallery -->
+        <div class="gallery" id="gallery-container">
+            <!-- Photos will be dynamically added here -->
+        </div>
+
+        <!-- Fixed Modal for Mobile -->
+        <div id="photoModal" class="modal">
+            <button class="close-btn">&times;</button>
+            <div class="modal-content">
+                <div class="modal-img-container">
+                    <img class="modal-img" src="" alt="Enlarged photo">
+                </div>
+                <div class="modal-info">
+                    <div class="modal-header">
+                        <h2 class="modal-title"></h2>
+                        <p class="modal-description"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <span class="modal-date">
+                            <i class="far fa-calendar"></i> <span class="date-text"></span>
+                        </span>
+                        <span class="modal-category"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p>DH Photo Gallery &copy; 2023 | Darul Huda Assam Centre</p>
+                    <p><small>Capturing the spirit of Islamic education and community</small></p>
+                </div>
+                <div class="photo-count">
+                    <div class="count-item">
+                        <span class="count-number" id="total-count">0</span>
+                        <span class="count-label">Total Photos</span>
+                    </div>
+                    <div class="count-item">
+                        <span class="count-number" id="display-count">0</span>
+                        <span class="count-label">Displaying</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<!-- Back to Top Button -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+    <script>
+        // Enhanced photo data with dates and featured flag
+        const photos = [
+            {
+                id: 1,
+                title: "Annual Milad Celebration",
+                category: "festival",
+                description: "The beautiful gathering for Milad-un-Nabi celebration at Darul Huda campus.",
+                url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-06-15",
+                featured: true
+            },
+            {
+                id: 2,
+                title: "Eid Prayer Congregation",
+                category: "festival",
+                description: "Students and faculty performing Eid prayer together in the campus grounds.",
+                url: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-07-22",
+                featured: false
+            },
+            {
+                id: 3,
+                title: "Graduation Ceremony",
+                category: "occasion",
+                description: "Graduating students receiving their certificates from respected scholars.",
+                url: "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-05-10",
+                featured: true
+            },
+            {
+                id: 4,
+                title: "Annual Sports Day",
+                category: "occasion",
+                description: "Students participating in various sports activities and competitions.",
+                url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-08-05",
+                featured: false
+            },
+            {
+                id: 5,
+                title: "Islamic Conference",
+                category: "event",
+                description: "Scholars from different institutions gathered for an Islamic conference.",
+                url: "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-04-18",
+                featured: false
+            },
+            {
+                id: 6,
+                title: "Quran Competition",
+                category: "event",
+                description: "Students showcasing their Quran recitation skills in annual competition.",
+                url: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-09-12",
+                featured: true
+            },
+            {
+                id: 7,
+                title: "Main Campus Building",
+                category: "campus",
+                description: "The beautiful architecture of Darul Huda Assam Centre's main building.",
+                url: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-03-25",
+                featured: false
+            },
+            {
+                id: 8,
+                title: "Library Study Hall",
+                category: "campus",
+                description: "Students engaged in studying at the campus library's peaceful environment.",
+                url: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-02-14",
+                featured: false
+            },
+            {
+                id: 9,
+                title: "Campus Mosque",
+                category: "campus",
+                description: "The beautiful mosque where students perform their daily prayers.",
+                url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-01-08",
+                featured: false
+            },
+            {
+                id: 10,
+                title: "Student Dormitories",
+                category: "campus",
+                description: "Clean and organized living quarters for students residing on campus.",
+                url: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-10-30",
+                featured: false
+            },
+            {
+                id: 11,
+                title: "Evening Study Circle",
+                category: "campus",
+                description: "Students gathered for evening study circles and group discussions.",
+                url: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-11-15",
+                featured: false
+            },
+            {
+                id: 12,
+                title: "Campus Garden Area",
+                category: "campus",
+                description: "The peaceful garden area where students relax and reflect.",
+                url: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                date: "2023-12-01",
+                featured: false
+            }
+        ];
+
+        // DOM elements
+        const gallery = document.getElementById('gallery-container');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const searchBox = document.querySelector('.search-box');
+        const modal = document.getElementById('photoModal');
+        const modalImg = document.querySelector('.modal-img');
+        const modalTitle = document.querySelector('.modal-title');
+        const modalDescription = document.querySelector('.modal-description');
+        const modalDate = document.querySelector('.date-text');
+        const modalCategory = document.querySelector('.modal-category');
+        const closeBtn = document.querySelector('.close-btn');
+        const totalCountSpan = document.getElementById('total-count');
+        const displayCountSpan = document.getElementById('display-count');
+        const totalCountHeader = document.getElementById('total-count-header');
+        const loading = document.getElementById('loading');
+        const categoryCount = document.getElementById('category-count');
+        const featuredCount = document.getElementById('featured-count');
+
+        // Initialize the gallery
+        function initGallery() {
+            // Show loading
+            loading.style.display = 'block';
+            gallery.innerHTML = '';
+
+            // Simulate loading delay for better UX
+            setTimeout(() => {
+                updateStats();
+                displayPhotos(photos);
+                loading.style.display = 'none';
+            }, 800);
+
+            // Set up filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+                    filterPhotos(filter);
+                });
+            });
+
+            // Set up search functionality
+            searchBox.addEventListener('input', debounce(() => {
+                const searchTerm = searchBox.value.toLowerCase().trim();
+                searchPhotos(searchTerm);
+            }, 300));
+
+            // Set up modal close button
+            closeBtn.addEventListener('click', () => {
+                closeModal();
+            });
+
+            // Close modal when pressing Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        }
+
+        // Debounce function for search
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Update statistics
+        function updateStats() {
+            totalCountSpan.textContent = photos.length;
+            totalCountHeader.textContent = photos.length;
+
+            // Count unique categories
+            const uniqueCategories = new Set(photos.map(photo => photo.category));
+            categoryCount.textContent = uniqueCategories.size;
+
+            // Count featured photos
+            const featuredPhotos = photos.filter(photo => photo.featured);
+            featuredCount.textContent = featuredPhotos.length;
+        }
+
+        // Display photos in the gallery
+        function displayPhotos(photoArray) {
+            gallery.innerHTML = '';
+
+            if (photoArray.length === 0) {
+                gallery.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px;">
+                        <i class="fas fa-images" style="font-size: 4rem; color: #ccc; margin-bottom: 20px;"></i>
+                        <h3 style="color: #666; margin-bottom: 10px;">No photos found</h3>
+                        <p style="color: #888;">Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                displayCountSpan.textContent = 0;
+                return;
+            }
+
+            photoArray.forEach(photo => {
+                const photoCard = document.createElement('div');
+                photoCard.className = 'photo-card';
+                photoCard.setAttribute('data-category', photo.category);
+                photoCard.setAttribute('data-id', photo.id);
+
+                photoCard.innerHTML = `
+                    <div class="photo-img-container">
+                        <img src="${photo.url}" alt="${photo.title}" class="photo-img" loading="lazy">
+                    </div>
+                    <div class="photo-info">
+                        <span class="photo-category">${photo.category.charAt(0).toUpperCase() + photo.category.slice(1)}</span>
+                        <h3 class="photo-title">${photo.title}</h3>
+                        <p class="photo-description">${photo.description}</p>
+                        <div class="photo-meta">
+                            <span class="photo-date">
+                                <i class="far fa-calendar"></i> ${formatDate(photo.date)}
+                            </span>
+                            <span style="color: #888;">
+                                <i class="fas fa-image"></i> #${photo.id}
+                            </span>
+                        </div>
+                    </div>
+                `;
+
+                // Add click event to open modal
+                photoCard.addEventListener('click', () => openModal(photo));
+
+                gallery.appendChild(photoCard);
+            });
+
+            // Update display count
+            displayCountSpan.textContent = photoArray.length;
+        }
+
+        // Filter photos by category
+        function filterPhotos(category) {
+            if (category === 'all') {
+                displayPhotos(photos);
+                return;
+            }
+
+            const filteredPhotos = photos.filter(photo => photo.category === category);
+            displayPhotos(filteredPhotos);
+        }
+
+        // Search photos by title or description
+        function searchPhotos(searchTerm) {
+            if (!searchTerm) {
+                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                filterPhotos(activeFilter);
+                return;
+            }
+
+            const searchedPhotos = photos.filter(photo =>
+                photo.title.toLowerCase().includes(searchTerm) ||
+                photo.description.toLowerCase().includes(searchTerm) ||
+                photo.category.toLowerCase().includes(searchTerm)
+            );
+
+            displayPhotos(searchedPhotos);
+        }
+
+        // Open modal with simplified view
+        function openModal(photo) {
+            modalImg.src = photo.url;
+            modalImg.alt = photo.title;
+            modalTitle.textContent = photo.title;
+            modalDescription.textContent = photo.description;
+            modalDate.textContent = formatDate(photo.date);
+            modalCategory.textContent = photo.category.charAt(0).toUpperCase() + photo.category.slice(1);
+            modal.style.display = 'flex';
+
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Initialize the gallery when the page loads
+        document.addEventListener('DOMContentLoaded', initGallery);
+
+//Back to Top Button
+    // Get the button element
+    const backToTopButton = document.getElementById('backToTop');
+
+    // Function to toggle button visibility
+    function toggleBackToTopButton() {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    }
+
+    // Function to scroll to top smoothly
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Event listeners
+    window.addEventListener('scroll', toggleBackToTopButton);
+    backToTopButton.addEventListener('click', scrollToTop);
+
+    // Initialize button state on page load
+    document.addEventListener('DOMContentLoaded', toggleBackToTopButton);
+
+    </script>
+</body>
+</html>

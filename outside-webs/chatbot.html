@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnswerBox - DHIU Assam Campus Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1 i {
+            font-size: 1.5rem;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-top: 5px;
+            font-weight: 300;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: white;
+            border-right: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-section {
+            margin-bottom: 2rem;
+        }
+
+        .info-section h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eaeaea;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .fact-list {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        .fact-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .fact-list li i {
+            color: #2a5298;
+            margin-top: 3px;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+        }
+
+        .chat-history {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 1rem 1.2rem;
+            border-radius: 18px;
+            line-height: 1.5;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #1e3c72;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f0f4ff;
+            color: #333;
+            border-bottom-left-radius: 4px;
+            border: 1px solid #e0e6ff;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
+        .message-header i {
+            font-size: 1.2rem;
+        }
+
+        .user-message .message-header i {
+            color: #a3c4ff;
+        }
+
+        .bot-message .message-header i {
+            color: #1e3c72;
+        }
+
+        .message-header span {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .message-content {
+            font-size: 1rem;
+        }
+
+        .chat-input-container {
+            border-top: 1px solid #e0e0e0;
+            padding: 1.5rem 2rem;
+            background-color: white;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: 1px solid #d1d9ff;
+            border-radius: 24px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+            resize: none;
+            max-height: 120px;
+            min-height: 24px;
+            line-height: 1.5;
+        }
+
+        .chat-input:focus {
+            border-color: #1e3c72;
+            box-shadow: 0 0 0 2px rgba(30, 60, 114, 0.1);
+        }
+
+        .send-button {
+            background-color: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .send-button:hover {
+            background-color: #2a5298;
+        }
+
+        .send-button i {
+            font-size: 1.2rem;
+        }
+
+        .examples {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .example-prompt {
+            background-color: #f0f4ff;
+            border: 1px solid #d1d9ff;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .example-prompt:hover {
+            background-color: #e1e8ff;
+            transform: translateY(-2px);
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 10px 16px;
+            background-color: #f0f4ff;
+            border-radius: 18px;
+            width: fit-content;
+            margin-bottom: 1.5rem;
+        }
+
+        .typing-indicator span {
+            height: 10px;
+            width: 10px;
+            background-color: #1e3c72;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-indicator span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .welcome-message h2 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .welcome-message p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background-color: #f8faff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 220px;
+            text-align: center;
+            border: 1px solid #e0e6ff;
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .feature h4 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: 300px;
+                overflow-y: auto;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-robot"></i> AnswerBox - DHIU Assam Campus Assistant</h1>
+        <div class="subtitle">Ask me anything about DHIU Assam Campus, established on 24 March 2013</div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="info-section">
+                <h3><i class="fas fa-info-circle"></i> About DHIU Assam Campus</h3>
+                <p>DHIU Assam Campus is situated at Baisha-Barmara in Barpeta District of Assam. It was established on 24 March 2013 as the first off-campus of DHIU Kerala in North East India.</p>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-map-marker-alt"></i> Key Facts</h3>
+                <ul class="fact-list">
+                    <li><i class="fas fa-calendar-alt"></i> <strong>Established:</strong> 24 March 2013</li>
+                    <li><i class="fas fa-landmark"></i> <strong>Location:</strong> Baisha-Barmara, Barpeta District, Assam</li>
+                    <li><i class="fas fa-arrows-alt"></i> <strong>Campus Area:</strong> About 10 acres of land</li>
+                    <li><i class="fas fa-train"></i> <strong>Nearest Station:</strong> Barpeta Road Railway station (43 km)</li>
+                    <li><i class="fas fa-plane"></i> <strong>Airport:</strong> Guwahati Airport (80 km)</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-university"></i> Campus Facilities</h3>
+                <ul class="fact-list">
+                    <li><i class="fas fa-building"></i> Academic Block</li>
+                    <li><i class="fas fa-home"></i> Attached Hostel Building</li>
+                    <li><i class="fas fa-mosque"></i> Jamia Masjid</li>
+                    <li><i class="fas fa-school"></i> Darul Huda Model School</li>
+                    <li><i class="fas fa-child"></i> Alif Preschool</li>
+                    <li><i class="fas fa-office-building"></i> Hadia Barpeta Regional Office</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-history" id="chatHistory">
+                <div class="welcome-message">
+                    <h2>Welcome to AnswerBox!</h2>
+                    <p>I'm your assistant for DHIU Assam Campus information. I can answer questions about the campus establishment, location, facilities, and more based on the provided information.</p>
+
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-map-pin"></i>
+                            <h4>Campus Location</h4>
+                            <p>Ask about where the campus is located</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-calendar"></i>
+                            <h4>Establishment</h4>
+                            <p>Ask when the campus was established</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-building"></i>
+                            <h4>Facilities</h4>
+                            <p>Ask about campus buildings and schools</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typingIndicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="input-wrapper">
+                    <textarea class="chat-input" id="chatInput" placeholder="Ask about DHIU Assam Campus... (e.g. When was it established?)" rows="1"></textarea>
+                    <button class="send-button" id="sendButton">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+
+                <div class="examples">
+                    <div class="example-prompt" data-prompt="When was DHIU Assam Campus established?">When was DHIU Assam Campus established?</div>
+                    <div class="example-prompt" data-prompt="What facilities are available on campus?">What facilities are available on campus?</div>
+                    <div class="example-prompt" data-prompt="How far is it from Guwahati Airport?">How far is it from Guwahati Airport?</div>
+                    <div class="example-prompt" data-prompt="What is the main aim of the institution?">What is the main aim of the institution?</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Information database about DHIU Assam Campus
+        const campusInfo = {
+            "establishment": "DHIU Assam Campus was established on 24 March 2013.",
+            "location": "The campus is situated at Baisha-Barmara in Barpeta District of Assam.",
+            "purpose": "It serves as the first off-campus of DHIU Kerala in North East India and aims at societal development through devoted activities to revive the socio-cultural domains.",
+            "area": "The campus lies on about 10 acres of land.",
+            "facilities": [
+                "Academic Block",
+                "Attached Hostel Building",
+                "Jamia Masjid",
+                "Hadia Barpeta Regional Office",
+                "Darul Huda Model School (completed 4 academic years)",
+                "Alif Preschool (a preschool)"
+            ],
+            "response": "DHIU and its institutions are receiving hopeful responses and supports from local people.",
+            "mission": "The institution molds its students to be the creative leaders of the community and to renovate the cultural heritage in Assam.",
+            "accessibility": "The institution is near to Barpeta Road Railway station (43 km) and is easily reachable from Guwahati Airport (80 km), which is the gateway to the Northeastern states.",
+            "modelSchool": "Darul Huda Model School has successfully completed 4 academic years.",
+            "preschool": "Alif Preschool functions as a preschool on campus."
+        };
+
+        // DOM elements
+        const chatHistory = document.getElementById('chatHistory');
+        const chatInput = document.getElementById('chatInput');
+        const sendButton = document.getElementById('sendButton');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const examplePrompts = document.querySelectorAll('.example-prompt');
+
+        // Initialize with a welcome message
+        addMessage("Hello! I'm AnswerBox, your assistant for DHIU Assam Campus information. Feel free to ask me anything about the campus.", "bot");
+
+        // Function to add a message to the chat
+        function addMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+
+            const messageHeader = document.createElement('div');
+            messageHeader.className = 'message-header';
+
+            const icon = document.createElement('i');
+            const senderName = document.createElement('span');
+
+            if (sender === 'user') {
+                icon.className = 'fas fa-user';
+                senderName.textContent = 'You';
+            } else {
+                icon.className = 'fas fa-robot';
+                senderName.textContent = 'AnswerBox';
+            }
+
+            messageHeader.appendChild(icon);
+            messageHeader.appendChild(senderName);
+
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.textContent = content;
+
+            messageDiv.appendChild(messageHeader);
+            messageDiv.appendChild(messageContent);
+
+            chatHistory.appendChild(messageDiv);
+
+            // Scroll to the bottom
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        // Function to simulate typing indicator
+        function showTypingIndicator() {
+            typingIndicator.style.display = 'block';
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            typingIndicator.style.display = 'none';
+        }
+
+        // Function to process user query and generate response
+        function generateResponse(query) {
+            const lowerQuery = query.toLowerCase();
+
+            // Check for specific keywords and generate appropriate responses
+            if (lowerQuery.includes('establish') || lowerQuery.includes('found') || lowerQuery.includes('start') || lowerQuery.includes('begin')) {
+                return campusInfo.establishment + " " + campusInfo.purpose;
+            }
+
+            if (lowerQuery.includes('where') || lowerQuery.includes('location') || lowerQuery.includes('situat')) {
+                return campusInfo.location + " " + campusInfo.accessibility;
+            }
+
+            if (lowerQuery.includes('facilit') || lowerQuery.includes('build') || lowerQuery.includes('infrastructure') || lowerQuery.includes('campus area')) {
+                return `The campus is spread over ${campusInfo.area} and includes: ${campusInfo.facilities.join(', ')}.`;
+            }
+
+            if (lowerQuery.includes('aim') || lowerQuery.includes('purpose') || lowerQuery.includes('mission') || lowerQuery.includes('goal')) {
+                return campusInfo.mission + " " + campusInfo.purpose;
+            }
+
+            if (lowerQuery.includes('airport') || lowerQuery.includes('guwahati') || lowerQuery.includes('distance') || lowerQuery.includes('far')) {
+                return campusInfo.accessibility;
+            }
+
+            if (lowerQuery.includes('railway') || lowerQuery.includes('station') || lowerQuery.includes('train')) {
+                return "The institution is near to Barpeta Road Railway station (43 km away).";
+            }
+
+            if (lowerQuery.includes('school') || lowerQuery.includes('model school') || lowerQuery.includes('darul huda')) {
+                return campusInfo.modelSchool + " It functions along with Alif Preschool.";
+            }
+
+            if (lowerQuery.includes('preschool') || lowerQuery.includes('alif')) {
+                return campusInfo.preschool;
+            }
+
+            if (lowerQuery.includes('response') || lowerQuery.includes('support') || lowerQuery.includes('local') || lowerQuery.includes('people')) {
+                return campusInfo.response;
+            }
+
+            if (lowerQuery.includes('acre') || lowerQuery.includes('land') || lowerQuery.includes('area') || lowerQuery.includes('size')) {
+                return campusInfo.area + " The campus includes various facilities like Academic Block, Hostel, Masjid, and schools.";
+            }
+
+            if (lowerQuery.includes('north east') || lowerQuery.includes('off-campus') || lowerQuery.includes('kerala')) {
+                return "DHIU Assam Campus is the first off-campus of DHIU Kerala in North East India.";
+            }
+
+            if (lowerQuery.includes('hostel') || lowerQuery.includes('accommodation')) {
+                return "The campus has an attached Hostel Building for student accommodation.";
+            }
+
+            if (lowerQuery.includes('masjid') || lowerQuery.includes('mosque') || lowerQuery.includes('jamia')) {
+                return "The campus includes a Jamia Masjid.";
+            }
+
+            if (lowerQuery.includes('office') || lowerQuery.includes('hadia') || lowerQuery.includes('regional')) {
+                return "The campus houses the Hadia Barpeta Regional Office.";
+            }
+
+            if (lowerQuery.includes('student') || lowerQuery.includes('leader') || lowerQuery.includes('mold')) {
+                return campusInfo.mission;
+            }
+
+            if (lowerQuery.includes('cultural') || lowerQuery.includes('heritage') || lowerQuery.includes('socio')) {
+                return campusInfo.purpose + " " + campusInfo.mission;
+            }
+
+            // Default response if no specific keywords are found
+            return `I can tell you that DHIU Assam Campus ${campusInfo.establishment} ${campusInfo.location} The campus aims to ${campusInfo.purpose} For more specific information, try asking about establishment date, location, facilities, or accessibility.`;
+        }
+
+        // Function to handle sending a message
+        function sendMessage() {
+            const query = chatInput.value.trim();
+
+            if (query === '') return;
+
+            // Add user message
+            addMessage(query, 'user');
+
+            // Clear input
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            // Simulate processing delay
+            setTimeout(() => {
+                // Generate and add bot response
+                const response = generateResponse(query);
+                hideTypingIndicator();
+                addMessage(response, 'bot');
+            }, 1000 + Math.random() * 1000);
+        }
+
+        // Auto-resize textarea
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        // Send message on button click
+        sendButton.addEventListener('click', sendMessage);
+
+        // Send message on Enter key (but allow Shift+Enter for new line)
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Handle example prompts
+        examplePrompts.forEach(prompt => {
+            prompt.addEventListener('click', function() {
+                chatInput.value = this.getAttribute('data-prompt');
+                chatInput.focus();
+                chatInput.style.height = 'auto';
+                chatInput.style.height = (chatInput.scrollHeight) + 'px';
+            });
+        });
+
+<script src='https://www.noupe.com/embed/019b78e63fa0713795676140da0fa28905b4.js'></script>
+
+    </script>
+</body>
+</html>

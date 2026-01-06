@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Darul Huda Assam Centre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Reset and Base Styles - Matching original design */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --gold: #d4af37;
+            --light: #f8f9fa;
+            --dark: #1a252f;
+            --gray: #6c757d;
+            --gradient-primary: linear-gradient(45deg, var(--secondary), var(--accent));
+            --gradient-accent: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        body {
+            line-height: 1.7;
+            color: #333;
+            background-color: #fefefe;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header - Matching original */
+        header {
+            background-color: rgba(255, 255, 255, 0.97);
+            color: var(--primary);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        header.scrolled {
+            padding: 0.7rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-icon {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .logo-text h1 {
+            font-size: 1.6rem;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .logo-text p {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            position: relative;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--accent);
+        }
+
+        nav a.active::before {
+            width: 100%;
+        }
+
+        nav i {
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--accent);
+        }
+
+        /* About Page Hero */
+        .page-hero {
+            position: relative;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(52, 152, 219, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(231, 76, 60, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, rgba(44, 62, 80, 0.4), rgba(44, 62, 80, 0.6)),
+                url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtQLOa2i3hEYP0FBz2k6ee734_KHOzwHt9YQ&s');
+            background-size: cover, cover, cover, cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 12rem 0 6rem;
+            text-align: center;
+            margin-top: 0;
+            overflow: hidden;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease;
+        }
+
+        .page-hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        /* Page Content */
+        .page-content {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 12px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 3px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 1.2rem auto 0;
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Redesigned Story Section */
+        .about-story {
+            padding: 4rem 0 3rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            margin-bottom: 2rem;
+            border-radius: 30px;
+        }
+
+        .story-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .story-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .highlight-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+        }
+
+        .highlight-card h4 {
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .highlight-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .highlight-text {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .story-description {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .story-description::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--secondary), var(--accent));
+        }
+
+        .description-box {
+            padding: 2.5rem;
+            position: relative;
+            z-index: 1;
+            margin-left: 8px;
+        }
+
+        .description-box h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .description-box h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .description-box p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .language-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-lang {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            min-width: 220px;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-lang i {
+            font-size: 1.2rem;
+        }
+
+        .btn-lang span {
+            font-size: 1rem;
+        }
+
+        .english-btn {
+            background: linear-gradient(45deg, var(--secondary), #2980b9);
+            color: white;
+        }
+
+        .english-btn:hover {
+            background: linear-gradient(45deg, #2980b9, var(--secondary));
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3);
+            color: white;
+        }
+
+        .assamese-btn {
+            background: linear-gradient(45deg, #FF9933, #FF5722);
+            color: white;
+        }
+
+        .assamese-btn:hover {
+            background: linear-gradient(45deg, #FF5722, #FF9933);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 87, 34, 0.3);
+            color: white;
+        }
+
+        /* Redesigned Mission & Values Section */
+        .mission-section {
+            padding: 3rem 0 4rem;
+        }
+
+        .values-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .value-card {
+            background: linear-gradient(145deg, #ffffff, #f5f7fa);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.03), rgba(231, 76, 60, 0.03));
+            z-index: 0;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(52, 152, 219, 0.2);
+        }
+
+        .value-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            border-radius: 18px;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+        }
+
+        .value-title {
+            font-size: 1.6rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .value-content {
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+        }
+
+        .value-content p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-preview {
+            max-height: 120px;
+            overflow: hidden;
+            position: relative;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-preview.expanded {
+            max-height: 1500px;
+        }
+
+        .content-preview::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, #f5f7fa 90%);
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .content-preview.expanded::after {
+            opacity: 0;
+        }
+
+        .content-section {
+            margin-bottom: 1.8rem;
+            padding-left: 1.2rem;
+            border-left: 3px solid var(--secondary);
+            background: rgba(52, 152, 219, 0.03);
+            padding: 1.2rem;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .content-section h4 {
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .content-section h4 i {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .content-section p {
+            margin-bottom: 0;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Improved Read More Button */
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, var(--secondary), #2980b9);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+            font-size: 0.95rem;
+        }
+
+        .read-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+            background: linear-gradient(45deg, #2980b9, var(--secondary));
+        }
+
+        .read-more-btn i {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.9rem;
+        }
+
+        .read-more-btn.expanded i {
+            transform: rotate(180deg);
+        }
+
+        /* Core Values Card Special Styling */
+        .core-values-card {
+            background: linear-gradient(145deg, #ffffff, #f9fafb);
+            border-left: 5px solid var(--accent);
+        }
+
+        .core-values-card .value-icon {
+            background: linear-gradient(135deg, var(--accent), #c0392b);
+        }
+
+        .values-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .values-list li {
+            padding: 0.6rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--gray);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .values-list li:last-child {
+            border-bottom: none;
+        }
+
+        .values-list li:before {
+            content: "•";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        /* Enhanced Facilities Section */
+        .facilities-section {
+            margin-top: 3rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%);
+            padding: 4rem 0;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .facilities-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+        }
+
+        .facilities-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .facilities-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .facilities-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .facilities-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid rgba(52, 152, 219, 0.1);
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .facility-card {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .facility-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(52, 152, 219, 0.2);
+        }
+
+        .facility-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.2);
+        }
+
+        .facility-img-container {
+            position: relative;
+            overflow: hidden;
+            height: 240px;
+        }
+
+        .facility-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .facility-card:hover .facility-img {
+            transform: scale(1.1);
+        }
+
+        .facility-icon {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+
+        .facility-content {
+            padding: 2rem;
+        }
+
+        .facility-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            transition: var(--transition);
+            text-decoration: none;
+            display: block;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+            width: fit-content;
+        }
+
+        .facility-title:hover {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        .facility-content p {
+            color: var(--gray);
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+            min-height: 80px;
+        }
+
+        .facility-features {
+            list-style: none;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 1rem;
+        }
+
+        .facility-features li {
+            padding: 0.4rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+            color: var(--gray);
+        }
+
+        .facility-features li:before {
+            content: "✓";
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .facility-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+        }
+
+        .facility-action {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .view-details-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.7rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .view-details-btn:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.2);
+        }
+
+        .facilities-cta {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-size: 0.95rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #c0392b;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.4);
+            color: white;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-logo h2 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .footer-logo span {
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo p {
+            color: #aaa;
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-links h3::after, .footer-contact h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-contact p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #bbb;
+        }
+
+        .footer-contact i {
+            color: var(--accent);
+            width: 20px;
+            margin-top: 3px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .social-icons a:hover {
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            transform: translateY(-5px);
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .copyright a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .copyright a:hover {
+            text-decoration: underline;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #8A2BE2 0%, #9370DB 100%);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            border: none;
+            outline: none;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 12px 30px rgba(138, 43, 226, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .page-hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: white;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                border-radius: 12px;
+                margin: 0 15px;
+                padding: 20px;
+                display: none;
+                z-index: 999;
+            }
+
+            nav.active {
+                display: block;
+                animation: fadeInUp 0.3s ease;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            nav li {
+                width: 100%;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            nav li:last-child {
+                border-bottom: none;
+            }
+
+            nav a {
+                display: flex;
+                padding: 1rem 0;
+                color: var(--primary);
+                font-size: 1rem;
+            }
+
+            .page-hero {
+                padding: 10rem 0 5rem;
+                background-attachment: scroll;
+                min-height: auto;
+            }
+
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-hero p {
+                font-size: 1.1rem;
+            }
+
+            .story-highlights {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .description-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .description-box h3 {
+                font-size: 1.6rem;
+            }
+
+            .language-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-lang {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .values-container, .facilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .value-card {
+                padding: 2rem;
+            }
+
+            .facilities-filter {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+                bottom: 25px;
+                right: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-hero p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+
+            .story-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .highlight-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .value-card, .facility-content {
+                padding: 1.8rem 1.5rem;
+            }
+
+            .value-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .value-title {
+                font-size: 1.4rem;
+            }
+
+            .facility-img-container {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="images/logo.png" alt="Darul Huda Assam Centre Logo">
+                </div>
+                <div class="logo-text">
+                    <h1>DH ASSAM</h1>
+                    <p>Excellence in Islamic & Modern Education</p>
+                </div>
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="academics.html"><i class="fas fa-graduation-cap"></i> Academics</a></li>
+                    <li><a href="students.html"><i class="fas fa-users"></i> Students</a></li>
+                    <li><a href="staff.html"><i class="fas fa-chalkboard-teacher"></i> Staff</a></li>
+                    <li><a href="admissions.html"><i class="fas fa-file-signature"></i> Admissions</a></li>
+                    <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container page-hero-content">
+            <h1 class="animate__animated animate__fadeInUp">About Darul Huda Assam Centre</h1>
+            <p class="animate__animated animate__fadeInUp">Discover our journey, mission, and commitment to excellence in Islamic and modern education since 2013.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Redesigned Our Story Section -->
+            <div class="about-story">
+                <div class="section-title">
+                    <h2>Our Story & Establishment</h2>
+                    <p class="section-subtitle">A journey of educational excellence since 2013</p>
+                </div>
+
+                <div class="story-content">
+                    <div class="story-highlights">
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i class="fas fa-calendar-day"></i>
+                            </div>
+                            <h4>Established</h4>
+                            <p class="highlight-number">2013</p>
+                            <p class="highlight-text">Started our educational journey</p>
+                        </div>
+
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h4>Campus Area</h4>
+                            <p class="highlight-number">10 Acres</p>
+                            <p class="highlight-text">Spacious learning environment</p>
+                        </div>
+
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <h4>Location</h4>
+                            <p class="highlight-number">Barpeta</p>
+                            <p class="highlight-text">Assam, North East India</p>
+                        </div>
+                    </div>
+
+                    <div class="story-description">
+                        <div class="description-box">
+                            <h3>Pioneering Islamic Education in Assam</h3>
+                            <p>Darul Huda Assam Centre, established in March 2013 at Baisha-Barmara in Barpeta District, stands as the first off-campus extension of Darul Huda Islamic University, Kerala in North East India. Spanning over 10 acres of dedicated educational space, our institution represents a harmonious blend of traditional Islamic wisdom and contemporary academic excellence.</p>
+
+                            <p>As a beacon of knowledge and cultural preservation, we are committed to nurturing well-rounded individuals who can contribute meaningfully to both their faith community and the broader society. Our campus serves not just as an educational institution, but as a vibrant center for community development and cultural revitalization.</p>
+
+                            <div class="language-buttons">
+                                <a href="#" class="btn-lang english-btn">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>Read More (English)</span>
+                                </a>
+                                <a href="#" class="btn-lang assamese-btn">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>অধিক পঢ়ক (Assamese)</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Redesigned Mission & Values Section -->
+            <div class="mission-section">
+                <div class="section-title">
+                    <h2>Our Mission & Values</h2>
+                    <p class="section-subtitle">Guiding principles that shape our educational philosophy and community</p>
+                </div>
+
+                <div class="values-container">
+                    <!-- Mission Card -->
+                    <div class="value-card">
+                        <div class="value-card-header">
+                            <div class="value-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3 class="value-title">Our Mission</h3>
+                        </div>
+                        <div class="value-content">
+                            <div class="content-preview" id="missionPreview">
+                                <p><strong>Our mission can be viewed from six dimensions:</strong></p>
+
+                                <div class="content-section">
+                                    <h4><i class="fas fa-rocket"></i> Dynamic and Dutiful</h4>
+                                    <p>To develop an Islamic educational framework to prepare religious scientists ('Ulama) who acquire, practice and propagate Islam, being alert of their ultimate responsibilities towards Almighty Allah and towards themselves, family, institution, society, surroundings and private and public resources.</p>
+                                </div>
+
+                                <div class="content-section">
+                                    <h4><i class="fas fa-balance-scale"></i> Holistic and Harmonious</h4>
+                                    <p>To offer a holistic and comprehensive material education, harmonious with the Islamic principles to foster personal, spiritual and intellectual development.</p>
+                                </div>
+
+                                <div class="content-section">
+                                    <h4><i class="fas fa-puzzle-piece"></i> Integrated Education</h4>
+                                    <p>To incorporate Islamic doctrinal beliefs and values into educational practices, integrating theories with practices, and extending classroom activities with real-life situations.</p>
+                                </div>
+
+                                <div class="content-section">
+                                    <h4><i class="fas fa-university"></i> Unified Knowledge</h4>
+                                    <p>To unify the purpose of seeking knowledge of various contents and nature in line with the Islamic legacy of hierarchy and unity of knowledge.</p>
+                                </div>
+
+                                <div class="content-section">
+                                    <h4><i class="fas fa-trophy"></i> Excellence and Innovation</h4>
+                                    <p>To provide academic excellence of highest standards and develop new trends and ideas to keep with the modernization of knowledge.</p>
+                                </div>
+
+                                <div class="content-section">
+                                    <h4><i class="fas fa-hands-helping"></i> Productive and Self-Reliant</h4>
+                                    <p>To offer evidence-based academic tools of wisdom to produce better material and build up self-reliance to meet academic challenges.</p>
+                                </div>
+                            </div>
+                            <button class="read-more-btn" id="missionBtn">
+                                Read More <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Core Values Card -->
+                    <div class="value-card core-values-card">
+                        <div class="value-card-header">
+                            <div class="value-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3 class="value-title">Our Core Values</h3>
+                        </div>
+                        <div class="value-content">
+                            <p>These fundamental values guide every aspect of life at Darul Huda Assam Centre. We believe in nurturing ethical leaders who contribute positively to society while maintaining strong Islamic identity.</p>
+
+                            <ul class="values-list">
+                                <li><strong>Curiosity:</strong> Fostering intellectual inquiry and lifelong learning</li>
+                                <li><strong>Integrity:</strong> Upholding honesty and ethical principles in all endeavors</li>
+                                <li><strong>Compassion:</strong> Demonstrating empathy and care for all creation</li>
+                                <li><strong>Resilience:</strong> Developing strength to overcome challenges with faith</li>
+                                <li><strong>Innovation:</strong> Encouraging creative thinking within Islamic framework</li>
+                                <li><strong>Community:</strong> Building strong bonds and serving society</li>
+                                <li><strong>Excellence:</strong> Striving for the highest standards in all pursuits</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Vision Card -->
+                    <div class="value-card">
+                        <div class="value-card-header">
+                            <div class="value-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="value-title">Our Vision</h3>
+                        </div>
+                        <div class="value-content">
+                            <div class="content-preview" id="visionPreview">
+                                <p>DHIU aims to be the bastion of expertise in Islamic education restoring the dynamic role and educational superiority of past Muslim society in all intellectual programs and that seeks to rekindle the spirit of scholarship in Islamic sciences.</p>
+
+                                <div class="content-section">
+                                    <h4><i class="fas fa-graduation-cap"></i> Islamization of Knowledge</h4>
+                                    <p>Our vision includes Islamization of knowledge and setting up international research centers of educational excellence in various Islamic disciplines for the development of Muslim community in learning, teaching and research of highest standards.</p>
+                                </div>
+
+                                <div class="content-section">
+                                    <h4><i class="fas fa-hands"></i> Exemplary Institution</h4>
+                                    <p>We aim to be an exemplary institution which can mold up a bunch of such religious scientists (Ulamas) who are the virtual heirs of the holy prophet Muhammad (pbuh), equipped to face modern challenges with traditional wisdom.</p>
+                                </div>
+
+                                <div class="content-section">
+                                    <h4><i class="fas fa-globe-asia"></i> Global Impact</h4>
+                                    <p>To establish ourselves as a globally recognized center for Islamic scholarship that bridges traditional knowledge with contemporary needs, creating solutions for modern challenges while preserving our rich heritage.</p>
+                                </div>
+                            </div>
+                            <button class="read-more-btn" id="visionBtn">
+                                Read More <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Campus & Facilities Section -->
+            <div class="facilities-section">
+                <div class="container">
+                    <div class="facilities-header">
+                        <h2>Campus & Facilities</h2>
+                        <p>A holistic learning environment with state-of-the-art facilities supporting academic excellence and personal growth. Explore our world-class amenities designed to nurture both Islamic and modern education.</p>
+                    </div>
+
+                    <!-- Facilities Filter -->
+                    <div class="facilities-filter">
+                        <button class="filter-btn active" data-filter="all">All Facilities</button>
+                        <button class="filter-btn" data-filter="academic">Academic</button>
+                        <button class="filter-btn" data-filter="residential">Residential</button>
+                        <button class="filter-btn" data-filter="recreational">Recreational</button>
+                        <button class="filter-btn" data-filter="technology">Technology</button>
+                    </div>
+
+                    <div class="facilities-grid">
+                        <!-- Digital Classroom -->
+                        <div class="facility-card" data-category="technology academic">
+                            <div class="facility-badge">Technology</div>
+                            <div class="facility-img-container">
+                                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Digital Classroom" class="facility-img">
+                                <div class="facility-icon">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3 class="facility-title">Digital Classroom</h3>
+                                <p>Fully equipped modern classrooms with smart boards, high-speed internet, and interactive learning tools to enhance educational experience.</p>
+                                <ul class="facility-features">
+                                    <li>Smart Interactive Boards</li>
+                                    <li>High-Speed Wi-Fi</li>
+                                    <li>Audio-Visual Systems</li>
+                                    <li>Student Response Systems</li>
+                                </ul>
+                                <div class="facility-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-number">20+</span>
+                                        <span class="stat-label">Rooms</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">50</span>
+                                        <span class="stat-label">Seats Each</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">24/7</span>
+                                        <span class="stat-label">Access</span>
+                                    </div>
+                                </div>
+                                <div class="facility-action">
+                                    <a href="dashboards/classroom-dashboard.html" target="_blank" class="view-details-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Digital Library -->
+                        <div class="facility-card" data-category="academic technology">
+                            <div class="facility-badge">Academic</div>
+                            <div class="facility-img-container">
+                                <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&auto=format&fit=crop&w=1476&q=80" alt="Digital Library" class="facility-img">
+                                <div class="facility-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3 class="facility-title">Digital Library</h3>
+                                <p>A modern library with extensive collection of Islamic and modern texts, digital resources, and quiet study areas for research and learning.</p>
+                                <ul class="facility-features">
+                                    <li>25,000+ Books Collection</li>
+                                    <li>Digital Reading Room</li>
+                                    <li>Research Assistance</li>
+                                    <li>Group Study Rooms</li>
+                                </ul>
+                                <div class="facility-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-number">25K+</span>
+                                        <span class="stat-label">Books</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">100+</span>
+                                        <span class="stat-label">Journals</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">8AM-8PM</span>
+                                        <span class="stat-label">Hours</span>
+                                    </div>
+                                </div>
+                                <div class="facility-action">
+                                    <a href="dashboards/library-dashboard.html" target="_blank" class="view-details-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Science Laboratory -->
+                        <div class="facility-card" data-category="academic technology">
+                            <div class="facility-badge">Science</div>
+                            <div class="facility-img-container">
+                                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Science Laboratories" class="facility-img">
+                                <div class="facility-icon">
+                                    <i class="fas fa-flask"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3 class="facility-title">Science Laboratory</h3>
+                                <p>Fully equipped labs for Physics, Chemistry, Biology, and Computer Science with modern equipment and safety-certified facilities.</p>
+                                <ul class="facility-features">
+                                    <li>Modern Equipment</li>
+                                    <li>Safety Certified</li>
+                                    <li>Research Grade Tools</li>
+                                    <li>ICT Integration</li>
+                                </ul>
+                                <div class="facility-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-number">4</span>
+                                        <span class="stat-label">Labs</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">30</span>
+                                        <span class="stat-label">Workstations</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">100%</span>
+                                        <span class="stat-label">Safety</span>
+                                    </div>
+                                </div>
+                                <div class="facility-action">
+                                    <a href="dashboards/sciencelab-dashboard.html" target="_blank" class="view-details-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sports Complex -->
+                        <div class="facility-card" data-category="recreational">
+                            <div class="facility-badge">Sports</div>
+                            <div class="facility-img-container">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Youth-soccer-indiana.jpg" alt="Sports Complex" class="facility-img">
+                                <div class="facility-icon">
+                                    <i class="fas fa-running"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3 class="facility-title">Sports Complex</h3>
+                                <p>Comprehensive sports facilities promoting physical health, teamwork, and competitive sports in a safe and inclusive environment.</p>
+                                <ul class="facility-features">
+                                    <li>Basketball Court</li>
+                                    <li>Football Ground</li>
+                                    <li>Indoor Games Room</li>
+                                    <li>Fitness Center</li>
+                                </ul>
+                                <div class="facility-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-number">5</span>
+                                        <span class="stat-label">Sports</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">2 Acres</span>
+                                        <span class="stat-label">Area</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">500+</span>
+                                        <span class="stat-label">Students</span>
+                                    </div>
+                                </div>
+                                <div class="facility-action">
+                                    <a href="dashboards/sports-dashboard.html" target="_blank" class="view-details-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Multipurpose Auditorium -->
+                        <div class="facility-card" data-category="academic recreational">
+                            <div class="facility-badge">Events</div>
+                            <div class="facility-img-container">
+                                <img src="https://www.aestheticdesigns.in/wp-content/uploads/2023/02/auditorium-ver-3b-e1675427561621.jpg" alt="Auditorium" class="facility-img">
+                                <div class="facility-icon">
+                                    <i class="fas fa-theater-masks"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3 class="facility-title">Multipurpose Auditorium</h3>
+                                <p>500-seat auditorium for seminars, cultural events, conferences, and community gatherings with advanced audio-visual systems.</p>
+                                <ul class="facility-features">
+                                    <li>500 Seating Capacity</li>
+                                    <li>Audio-Visual Systems</li>
+                                    <li>Stage Facilities</li>
+                                    <li>AC Environment</li>
+                                </ul>
+                                <div class="facility-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-number">500</span>
+                                        <span class="stat-label">Seats</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">4K</span>
+                                        <span class="stat-label">Projection</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">50+</span>
+                                        <span class="stat-label">Events/Year</span>
+                                    </div>
+                                </div>
+                                <div class="facility-action">
+                                    <a href="dashboards/auditorium-dashboard.html" target="_blank" class="view-details-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Student Hostels -->
+                        <div class="facility-card" data-category="residential">
+                            <div class="facility-badge">Residential</div>
+                            <div class="facility-img-container">
+                                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/525325218.jpg?k=0d067d70cd2729dce82c1957e8f1b89685d4f42b3f5f407aa5ec829e7e2e5777&o=" alt="Student Hostels" class="facility-img">
+                                <div class="facility-icon">
+                                    <i class="fas fa-bed"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3 class="facility-title">Student Hostels</h3>
+                                <p>Safe and comfortable accommodation with modern amenities for residential students, fostering community living and academic focus.</p>
+                                <ul class="facility-features">
+                                    <li>24/7 Security</li>
+                                    <li>Wi-Fi Connectivity</li>
+                                    <li>Study Rooms</li>
+                                    <li>Recreational Areas</li>
+                                </ul>
+                                <div class="facility-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-number">200+</span>
+                                        <span class="stat-label">Rooms</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">24/7</span>
+                                        <span class="stat-label">Security</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">2-3</span>
+                                        <span class="stat-label">Per Room</span>
+                                    </div>
+                                </div>
+                                <div class="facility-action">
+                                    <a href="dashboards/hostel-dashboard.html" target="_blank" class="view-details-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Canteen -->
+                        <div class="facility-card" data-category="residential recreational">
+                            <div class="facility-badge">Dining</div>
+                            <div class="facility-img-container">
+                                <img src="https://5.imimg.com/data5/SELLER/Default/2024/2/389847446/ZV/FB/ED/181942627/school-canteen-service.jpg" alt="Food Court" class="facility-img">
+                                <div class="facility-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3 class="facility-title">Canteen & Dining</h3>
+                                <p>Hygienic dining facilities serving nutritious and delicious meals to students and staff, with multiple dietary options available.</p>
+                                <ul class="facility-features">
+                                    <li>Hybrid Kitchen</li>
+                                    <li>Dietary Options</li>
+                                    <li>Quality Certified</li>
+                                    <li>Spacious Seating</li>
+                                </ul>
+                                <div class="facility-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-number">3</span>
+                                        <span class="stat-label">Meals/Day</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">300</span>
+                                        <span class="stat-label">Capacity</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">100%</span>
+                                        <span class="stat-label">Hygiene</span>
+                                    </div>
+                                </div>
+                                <div class="facility-action">
+                                    <a href="dashboards/canteen-dashboard.html" target="_blank" class="view-details-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Prayer Facilities -->
+                        <div class="facility-card" data-category="residential recreational">
+                            <div class="facility-badge">Spiritual</div>
+                            <div class="facility-img-container">
+                                <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Prayer Facilities" class="facility-img">
+                                <div class="facility-icon">
+                                    <i class="fas fa-mosque"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3 class="facility-title">Prayer Facilities</h3>
+                                <p>Beautiful and spacious prayer areas for students and staff, providing a peaceful environment for spiritual connection and worship.</p>
+                                <ul class="facility-features">
+                                    <li>Separate Sections</li>
+                                    <li>Wudu Facilities</li>
+                                    <li>Air Conditioned</li>
+                                    <li>Quran Library</li>
+                                </ul>
+                                <div class="facility-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-number">5</span>
+                                        <span class="stat-label">Daily Prayers</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">500+</span>
+                                        <span class="stat-label">Capacity</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">24/7</span>
+                                        <span class="stat-label">Access</span>
+                                    </div>
+                                </div>
+                                <div class="facility-action">
+                                    <a href="dashboards/prayer-dashboard.html" target="_blank" class="view-details-btn">
+                                        <i class="fas fa-external-link-alt"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="facilities-cta">
+                        <a href="contact.html" class="btn btn-primary">
+                            <i class="fas fa-calendar-alt"></i> Schedule a Campus Tour
+                        </a>
+                        <p style="margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> All facilities are maintained to the highest standards and regularly upgraded
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <h2>Darul Huda <span>Assam Centre</span></h2>
+                    <p>Excellence in Islamic & Modern Education since 2013. We are committed to nurturing ethical leaders and knowledgeable Muslims for the modern world.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="academics.html"><i class="fas fa-chevron-right"></i> Academics</a></li>
+                        <li><a href="students.html"><i class="fas fa-chevron-right"></i> Student Life</a></li>
+                        <li><a href="admissions.html"><i class="fas fa-chevron-right"></i> Admissions</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Barpeta, Bhogdia, Baisha-Barmara<br>Assam, PIN-781305</p>
+                    <p><i class="fas fa-phone"></i> +91 8399902373</p>
+                    <p><i class="fas fa-envelope"></i> info@darulhudaassam.edu</p>
+                    <p><i class="fas fa-clock"></i> Saturday - Thursday: 7:00 AM - 3:00 PM</p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2024 Darul Huda Assam Centre. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+                <p style="margin-top: 0.8rem;">Designed with <i class="fas fa-heart" style="color: var(--accent);"></i> For the Future of Islamic Education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const mainHeader = document.getElementById('mainHeader');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mainNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden';
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
+
+            // Back to top button visibility
+            toggleBackToTopButton();
+        });
+
+        // Improved Read More functionality
+        const missionBtn = document.getElementById('missionBtn');
+        const visionBtn = document.getElementById('visionBtn');
+        const missionPreview = document.getElementById('missionPreview');
+        const visionPreview = document.getElementById('visionPreview');
+
+        function setupReadMore(btn, preview) {
+            if (btn && preview) {
+                btn.addEventListener('click', () => {
+                    preview.classList.toggle('expanded');
+                    btn.classList.toggle('expanded');
+
+                    if (preview.classList.contains('expanded')) {
+                        btn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
+                    } else {
+                        btn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
+                    }
+                });
+            }
+        }
+
+        setupReadMore(missionBtn, missionPreview);
+        setupReadMore(visionBtn, visionPreview);
+
+        // Facilities Filter Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const facilityCards = document.querySelectorAll('.facility-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter');
+
+                    facilityCards.forEach(card => {
+                        if (filterValue === 'all') {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            const categories = card.getAttribute('data-category').split(' ');
+                            if (categories.includes(filterValue)) {
+                                card.style.display = 'block';
+                                setTimeout(() => {
+                                    card.style.opacity = '1';
+                                    card.style.transform = 'translateY(0)';
+                                }, 10);
+                            } else {
+                                card.style.opacity = '0';
+                                card.style.transform = 'translateY(20px)';
+                                setTimeout(() => {
+                                    card.style.display = 'none';
+                                }, 300);
+                            }
+                        }
+                    });
+                });
+            });
+
+            // Set active navigation link
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('nav a, .footer-links a');
+
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Add scroll class if page loads scrolled
+            if (window.scrollY > 100) {
+                mainHeader.classList.add('scrolled');
+            }
+
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.value-card, .facility-card, .highlight-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+
+        function toggleBackToTopButton() {
+            if (window.scrollY > 500) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        backToTopButton.addEventListener('click', scrollToTop);
+
+        // Initialize button state on page load
+        document.addEventListener('DOMContentLoaded', toggleBackToTopButton);
+
+        // Add hover effect to cards
+        document.querySelectorAll('.value-card, .facility-card, .highlight-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Enhanced facility card hover effect
+        document.querySelectorAll('.facility-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.facility-icon');
+                if (icon) {
+                    icon.style.transform = 'scale(1.1)';
+                    icon.style.transition = 'transform 0.3s ease';
+                }
+            });
+
+            card.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.facility-icon');
+                if (icon) {
+                    icon.style.transform = 'scale(1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
